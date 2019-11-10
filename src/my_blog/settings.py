@@ -119,11 +119,12 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
+STATIC_URL = '/static/'
+
 # If you want to make static folder for all project you can use this code .
 
-STATIC_URL = '/static/'
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR , "static"),
-    'E:\Downloads\My-Github\Blogger\src\static',
-]
+#STATICFILES_DIRS = [
+#    os.path.join(BASE_DIR , "static"),
+#    'E:\Downloads\My-Github\Blogger\src\static',
+#]
 
