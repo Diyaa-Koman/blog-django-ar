@@ -1,23 +1,23 @@
-{% load static %}
-<!DOCTYPE html>
+{% extends 'blog/base.html' %}
+{% block content %}
 
-<html>
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <link rel="stylesheet" href="{% static 'blog/css/bootstrap.min.css' %}">
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
-        <link rel="stylesheet" href="{% static 'blog/css/main.css' %}">
-        <link rel="shortcut icon" href="{% static 'blog/images/favicon.ico' %}">
-        <style>
-        </style>
-    </head>
-    <body>
-        <div><i class="fas fa-home"></i> اهلا وسهلا</div>
+{% if messages %}
+{% for message in messages %}
+<div class="alert alert-{{message.tags}}">
+    {{message}}
+</div>
+{% endfor %}
+{% endif %}
 
+{% for post in posts %}
+    <div class="border p-3 mb-3">
+        <img class = "rounded-circle border m-2" width="110px" height="100px" src="{{post.author.profile.image.url}}" alt="صورة الناشر" >
+        <span class="text-secondary">نشر في {{post.post_date|date:'d-m-Y'}}</span>
+        <h3><a href="{% url 'detail' post.id %}" class="text-dark">{{post.title}}</a></h3>
+        <p>{{post.content}}</p>
+    </div>
+{% endfor %}
 
-        <script src="{% static 'blog/js/jquery-3.4.1.min.js' %}"></script>
-        <script src="{% static 'blog/js/popper.min.js' %}"></script>
-        <script src="{% static 'blog/js/bootstrap.min.js' %}"></script>
-    </body>
-</html>
+{% include 'blog/pagination.html' with page=posts %}
+
+{% endblock content %}

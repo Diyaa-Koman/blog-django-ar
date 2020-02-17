@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'blog.apps.BlogConfig',
     'user.apps.UserConfig',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -127,4 +128,12 @@ STATIC_URL = '/static/'
 #    os.path.join(BASE_DIR , "static"),
 #    'E:\Downloads\My-Github\Blogger\src\static',
 #]
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+LOGIN_REDIRECT_URL = 'home'
+LOGIN_URL = 'login'
+
+
+MEDIA_ROOT = os.path.join(BASE_DIR , 'media')
+MEDIA_URL = '/media/'
 

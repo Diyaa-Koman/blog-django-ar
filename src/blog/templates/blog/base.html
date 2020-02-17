@@ -1,0 +1,129 @@
+{% load static %}
+{% load post_tag %}
+
+<!DOCTYPE html>
+
+<html lang="ar">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        {% if title %}
+        <title>مدونة | {{title}}</title>
+        {% else %}
+        <title>مدونة</title>
+        {% endif %}
+        <link rel="stylesheet" href="{% static 'blog/css/bootstrap.min.css' %}">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+        <link rel="stylesheet" href="{% static 'blog/css/main.css' %}">
+        <link rel="shortcut icon" href="{% static 'blog/images/favicon.ico' %}">
+        <style>
+        </style>
+    </head>
+    <body>
+        <header>
+            <!-- Start Navbar -->
+            <nav class="navbar navbar-expand-lg navbar-light bg-light ">
+              <a class="navbar-brand" href="{% url 'home' %}">
+                  <img src="{% static 'blog/images/mim-logo.png' %}" alt="شعار مدونة" width="30px">
+                  مدونة</a>
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                  
+                {% if user.is_authenticated %}
+                  <ul class="navbar-nav mr-auto">
+                    <li class="nav-item"><a class="nav-link" href="{% url 'new_post' %}">تدوينة جديدة</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'profile' %}">الملف الشخصي</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">تسجيل الخروج</a></li>
+                  </ul>
+                {% else %}
+                  <ul class="navbar-nav mr-auto">
+                    <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">تسجيل الدخول</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'register' %}">تسجيل</a></li>
+                  </ul>
+                {% endif %}
+                
+
+              </div>
+            </nav>
+            <!-- End Navbar -->
+        </header>
+        
+        <section>
+            <div class="container">
+                <div class="row mt-4">
+                    <div class="col-md-8">
+                    {% block content %}
+                        
+                    {% endblock content %}
+                    </div>
+                    <div class="col-md-4">
+                         <div class="card mb-3">
+                            <h3 class="text-center bg-secondary text-light p-2">آخر التدوينات</h3>
+                            {% latest_posts %}
+                        </div>
+                         <div class="card mb-3">
+                            <h3 class="text-center bg-secondary text-light p-2">آخر التعليقات</h3>
+                            {% latest_comments %}
+                         </div>
+                    </div>
+                </div>
+            </div>
+        
+        </section>
+        
+        <footer class="bg-secondary">
+            <div class="container-fluid">
+                 <div class="row">
+                    <div class="col-md">
+                        <div class="card-group mt-3">
+                            <div class="card m-3">
+                                <h3 class="card-title text-center border-bottom p-2 m-3">من أنا</h3>
+                                <div class="card-body">
+                                    <div class="text-center">
+                                        <img src="{% static 'blog/images/mim-logo.png' %}" alt="شعار مدونة" width="100px">
+                                    </div>
+                                   نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي نص تجريبي
+                                </div>
+                            </div>
+                            <div class="card m-3">
+                            <h3 class="card-title text-center border-bottom p-2 m-3">مواقع هامة</h3>
+                            <div class="card-body">
+                                <ul>
+                                    <li><a class="text-dark" href="https://www.python.org/doc/">وثائق بايثون</a></li>
+                                    <li><a class="text-dark" href="https://docs.djangoproject.com/en/2.2/">وثائق
+                                            دجانجو</a></li>
+                                    <li><a class="text-dark" href="https://developer.mozilla.org/">توثيق MDN</a></li>
+                                </ul>
+                            </div>
+                            </div>
+                            <div class="card m-3">
+                                <h3 class="card-title text-center border-bottom p-2 m-3">وسائل التواصل الاجتماعي</h3>
+                                <h4 class="card-body text-center">
+                                    <a hraf="" class="text-secondary"><i class="fab fa-facebook"></i></a>
+                                    <a hraf="" class="text-secondary"><i class="fab fa-twitter"></i></a>
+                                    <a hraf="" class="text-secondary"><i class="fab fa-instagram"></i></a>
+                                    <a hraf="" class="text-secondary"><i class="fab fa-telegram"></i></a>
+                                    <a hraf="" class="text-secondary"><i class="fab fa-youtube"></i></a>
+                                    <a hraf="" class="text-secondary"><i class="fab fa-linkedin"></i></a>
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row p-2">
+                    <div class="col-md text-center">
+                        <small class="text-light">&copy; جميع الحقوق محفوظة {% now 'Y' %}</small>
+                    </div>
+                </div>
+            </div>
+
+        </footer>
+
+        <script src="{% static 'blog/js/jquery-3.4.1.min.js' %}"></script>
+        <script src="{% static 'blog/js/popper.min.js' %}"></script>
+        <script src="{% static 'blog/js/bootstrap.min.js' %}"></script>
+    </body>
+</html>
